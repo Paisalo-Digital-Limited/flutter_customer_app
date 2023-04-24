@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_customer_app/Dashboard.dart';
 import 'package:numeric_keyboard/numeric_keyboard.dart';
 
 class OTPpages extends StatefulWidget {
@@ -106,6 +107,7 @@ class _OTPpagesState extends State<OTPpages> {
     ),
     child: MaterialButton(
     onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder:(context)=> Dashboard()));
     },
     color: Color(0xFFFF0741),
     shape: const RoundedRectangleBorder(
