@@ -73,12 +73,13 @@ class _DashboardState extends State<Dashboard> {
                       color: Color(0xffddf5ff),
                       height: Adaptive.h(25.5),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top:20,bottom:4.0),
+                            padding: const EdgeInsets.only(top:0,bottom:0.0),
                             child: Container(
-                                height: 10.h,
-                                width: 10.w,
+                                height: 12.h,
+                                width: 12.w,
                                 child: Image.asset("assests/images/loan.png")),
                           ),
                           Padding(
@@ -114,20 +115,21 @@ class _DashboardState extends State<Dashboard> {
                       color: Color(0xffffe7de),
                       height: Adaptive.h(25.5),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top:20,bottom:4.0),
+                            padding: const EdgeInsets.only(top:0,bottom:0.0),
                             child: Container(
-                                height: 10.h,
-                                width: 10.w,
+                                height: 12.h,
+                                width: 12.w,
                                 child: Image.asset("assests/images/emi.png")),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(5.0),
                             child: Text("EMIs",style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold,fontFamily: 'Scada'),),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(12.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Center(child: Text("Here you can find all the details about you loans EMIs",style: TextStyle(fontSize: 13.sp,fontFamily: 'Scada'))),
                           )
 
@@ -157,7 +159,7 @@ class _DashboardState extends State<Dashboard> {
                       width: MediaQuery.of(context).size.width-20,
 
                       color: Color(0xffdeffd3),
-                      height: 15.h,
+                      height: 14.h,
                      child: Row(
                        children: [
                          Padding(
@@ -184,9 +186,6 @@ class _DashboardState extends State<Dashboard> {
                     ),
                   ),
                 ),
-
-
-
 
 
               ],
