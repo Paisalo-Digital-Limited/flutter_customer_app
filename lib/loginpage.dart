@@ -23,15 +23,15 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Container(
                 child: Padding(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
                           height: 160,
-                          padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+                          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
                           child: Image.asset("assests/images/logo.png")),
-                      Padding(
+                      const Padding(
                           padding: EdgeInsets.all(6),
                           child: Text(
                             "Enter User ID",
@@ -39,11 +39,11 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 13, fontWeight: FontWeight.bold),
                           )),
                       Container(
-                        padding: EdgeInsets.only(left: 6,right: 6),
+                        padding: const EdgeInsets.only(left: 6,right: 6),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(4),
-                            boxShadow: [
+                            boxShadow:const [
                               BoxShadow(
                                   color: Color.fromRGBO(0, 0, 0, .2),
                                   blurRadius: 2.0,
@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                                     hintText: "User ID",
                                     hintStyle: TextStyle(
                                         color: Colors.grey[400], fontSize: 16),
-                                    icon: Icon(Icons.account_circle),
+                                    icon: const Icon(Icons.account_circle),
                                     iconColor: Colors.red.shade100),
                               ),
                             ),
@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
 
-
+ // this is the login Layout and view is created to.
 
                     ],
                   ),

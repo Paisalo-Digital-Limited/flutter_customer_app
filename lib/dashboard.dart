@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_customer_app/EMIDetails.dart';
+import 'package:flutter_customer_app/emidetails.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -24,17 +25,18 @@ class _DashboardState extends State<Dashboard> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 10,),
+           // SizedBox(height: 10,),
             SizedBox(
 
-              width: double.maxFinite,
-              height: 150,
+             // width: 1000.w,
+              height: Adaptive.h(25.5),
           child: Container(
-            width: double.maxFinite,
+            //width: double.maxFinite,
+
             child: CarouselSlider(
 
               options: CarouselOptions(
-                height: 180.0,
+                height: Adaptive.h(30.5),
                 enlargeCenterPage: true,
                 autoPlay: true,
                 aspectRatio: 16 / 9,
@@ -52,7 +54,7 @@ class _DashboardState extends State<Dashboard> {
             ),
           ),
         ),
-            SizedBox(height: 8,),
+          //  SizedBox(height: 5,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -69,23 +71,23 @@ class _DashboardState extends State<Dashboard> {
                       width: MediaQuery.of(context).size.width/2-20,
 
                       color: Color(0xffddf5ff),
-                      height: 190,
+                      height: Adaptive.h(25.5),
                       child: Column(
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top:20,bottom:4.0),
                             child: Container(
-                                height: 50,
-                                width: 50,
+                                height: 10.h,
+                                width: 10.w,
                                 child: Image.asset("assests/images/loan.png")),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text("Loans",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,fontFamily: 'Scada'),),
+                            padding: const EdgeInsets.all(5.0),
+                            child: Text("LOAN",style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold,fontFamily: 'Scada'),),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(10.0),
-                            child: Center(child: Text("Here you can find all the loans on you from paisalo digital limited",style: TextStyle(fontSize: 12,fontFamily: 'Scada'),)),
+                            child: Center(child: Text("Here you can find all the loans on you from paisalo digital limited",style: TextStyle(fontSize: 13.sp,fontFamily: 'Scada'),)),
                           )
 
                         ],
@@ -110,23 +112,23 @@ class _DashboardState extends State<Dashboard> {
                       width: MediaQuery.of(context).size.width/2-20,
 
                       color: Color(0xffffe7de),
-                      height: 190,
+                      height: Adaptive.h(25.5),
                       child: Column(
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top:20,bottom:4.0),
                             child: Container(
-                                height: 50,
-                                width: 50,
+                                height: 10.h,
+                                width: 10.w,
                                 child: Image.asset("assests/images/emi.png")),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text("EMIs",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,fontFamily: 'Scada'),),
+                            child: Text("EMIs",style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold,fontFamily: 'Scada'),),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(12.0),
-                            child: Center(child: Text("Here you can find all the details about you loans EMIs",style: TextStyle(fontSize: 12,fontFamily: 'Scada'))),
+                            child: Center(child: Text("Here you can find all the details about you loans EMIs",style: TextStyle(fontSize: 13.sp,fontFamily: 'Scada'))),
                           )
 
                         ],
@@ -136,7 +138,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ],
             ),
-         SizedBox(height: 4,),
+              SizedBox(height: 4,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -155,14 +157,14 @@ class _DashboardState extends State<Dashboard> {
                       width: MediaQuery.of(context).size.width-20,
 
                       color: Color(0xffdeffd3),
-                      height: 80,
+                      height: 15.h,
                      child: Row(
                        children: [
                          Padding(
                            padding: const EdgeInsets.only(left: 20.0),
                            child: Container(
-                           height: 40,
-                           width: 40,
+                               height: 8.h,
+                               width: 8.w,
                            child: Image.asset("assests/images/applyloan.png")),
                          ),
                          Padding(
@@ -171,9 +173,9 @@ class _DashboardState extends State<Dashboard> {
                              crossAxisAlignment: CrossAxisAlignment.start,
                              mainAxisAlignment: MainAxisAlignment.center,
                              children: [
-                               Text("Apply for Loan",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,fontFamily: 'Scada'),),
+                               Text("Apply for Loan",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.bold,fontFamily: 'Scada'),),
                                SizedBox(height: 5,),
-                               Text("Click here to apply for Loan",style: TextStyle(fontSize: 14,fontFamily: 'Scada'),),
+                               Text("Click here to apply for Loan",style: TextStyle(fontSize: 14.sp,fontFamily: 'Scada'),),
                              ],
                            ),
                          )
@@ -209,7 +211,7 @@ class _DashboardState extends State<Dashboard> {
                       width: MediaQuery.of(context).size.width-20,
 
                       color: Color(0xFFFFF5DA),
-                      height: 120,
+                      height: 16.h,
                       child: Column(
                         children: [
                           Row(
@@ -217,8 +219,8 @@ class _DashboardState extends State<Dashboard> {
 
                             children: [
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text("Your Upcoming EMI",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,fontFamily: 'Scada'),),
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text("Your Upcoming EMI",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp,fontFamily: 'Scada'),),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -226,8 +228,8 @@ class _DashboardState extends State<Dashboard> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Text("Due Date",style: TextStyle(color: Colors.grey,fontFamily: 'Scada'),),
-                                  Text("12-08-2023",style: TextStyle(fontWeight: FontWeight.bold,fontFamily: 'Scada'),),
+                                  Text("Due Date",style: TextStyle(color: Colors.grey,fontFamily: 'Scada',fontSize: 14.sp),),
+                                  Text("12-08-2023",style: TextStyle(fontWeight: FontWeight.bold,fontFamily: 'Scada',fontSize: 14.sp),),
                                 ],
                               ),
                             )
@@ -243,15 +245,15 @@ class _DashboardState extends State<Dashboard> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("₹5456/-",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,fontFamily: 'Scada'),),
+                                    Text("₹5456/-",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp,fontFamily: 'Scada'),),
                                     SizedBox(height: 2,),
-                                    Text("05/23 -78547854",style: TextStyle(fontSize: 13,fontFamily: 'Scada'),),
+                                    Text("05/23 -78547854",style: TextStyle(fontSize: 14.sp,fontFamily: 'Scada'),),
                                   ],
                                 ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: MaterialButton(onPressed: (){},child: Text("Pay Now",style: TextStyle(color: Colors.white,fontFamily: 'Scada',fontWeight: FontWeight.bold),),color: Colors.green,),
+                                child: MaterialButton(onPressed: (){},child: Text("Pay Now",style: TextStyle(fontSize: 14.sp,color: Colors.white,fontFamily: 'Scada',fontWeight: FontWeight.bold),),color: Colors.green,),
                               )
                             ],
                           )

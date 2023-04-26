@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_customer_app/LoginByMobile.dart';
-import 'package:flutter_customer_app/LoginPage.dart';
+import 'package:flutter_customer_app/loginbymobile.dart';
+import 'package:flutter_customer_app/loginpage.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -49,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         child: Text(
                           "Welcome to Paisalo Digital",
                           style: TextStyle(
-                              fontSize: 24,
+                              fontSize: 22.sp,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                         )),
@@ -59,12 +60,12 @@ class _SplashScreenState extends State<SplashScreen> {
                         child: Text(
                           "अर्थ: समाजस्य न्यास:",
                           style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 20.sp,
                             color: Colors.white,
                           ),
                         )),
 
-                    SizedBox(height: 30,),
+                    const SizedBox(height: 30,),
                     Align(
                         alignment: Alignment.center,
                         child: Container(
@@ -73,7 +74,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           child: Text(
                             "Wealth – Worldly Things – Society Trust \n Thus, wealth owned by Paisalo Digital Limited id Trust property of Society",
                             style: TextStyle(
-                              fontSize: 15,
+                              fontSize: 15.sp,
                               color: Colors.white,
                             ),textAlign: TextAlign.center,
                           ),
@@ -87,10 +88,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 padding: const EdgeInsets.all(15.0),
                 child: Card(
                   elevation: 6,
-                  child: Container(height: 40,
+                  child: Container(height: Adaptive.h(6.5),
                   alignment: Alignment.center,
                   width: double.maxFinite,
-                  child: Text("Get Started",style: TextStyle(color: Colors.red,fontSize: 17,fontWeight: FontWeight.bold),),
+                  child: Text("Get Started",style: TextStyle(color: Colors.red,fontSize: 18.sp,fontWeight: FontWeight.bold),),
                   color: Colors.white),
                 ),
               )

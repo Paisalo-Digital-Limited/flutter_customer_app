@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_customer_app/SplashScreen.dart';
+import 'package:flutter_customer_app/splashscreen.dart';
 import 'package:flutter_customer_app/colors/AppColors.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,16 +28,21 @@ class MyApp extends StatelessWidget {
       900:Color.fromRGBO(184, 4, 46, 1.0),
     };
     AppColors appColors=AppColors();
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: Theme.of(context).copyWith(
-      colorScheme: Theme.of(context).colorScheme.copyWith(
-        primary: const Color(0xFFFF0749),
-      ),
-    ),
-      home:  SplashScreen(),
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: Theme.of(context).copyWith(
+            colorScheme: Theme.of(context).colorScheme.copyWith(
+              primary: const Color(0xFFFF0749),
+            ),
+          ),
+          home:  SplashScreen(),
+        );
+      },
+      maxTabletWidth: 900, // Optional
     );
-  }
+ }
 }
 
 

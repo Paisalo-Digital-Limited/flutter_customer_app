@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_customer_app/Dashboard.dart';
+import 'package:flutter_customer_app/dashboard.dart';
 import 'package:numeric_keyboard/numeric_keyboard.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class OTPpages extends StatefulWidget {
   const OTPpages({Key? key}) : super(key: key);
@@ -26,8 +27,8 @@ class _OTPpagesState extends State<OTPpages> {
   Widget otpNumberWidget(int position) {
     try {
       return Container(
-        height: 40,
-        width: 40,
+        height: Adaptive.h(6.5),
+        width: 12.w,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 0),
             borderRadius: const BorderRadius.all(Radius.circular(8))
@@ -36,8 +37,8 @@ class _OTPpagesState extends State<OTPpages> {
       );
     } catch (e) {
       return Container(
-        height: 40,
-        width: 40,
+        height: Adaptive.h(6.5),
+        width: 12.w,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 0),
             borderRadius: const BorderRadius.all(Radius.circular(8))
@@ -80,7 +81,7 @@ class _OTPpagesState extends State<OTPpages> {
     children: <Widget>[
     Container(
     margin: const EdgeInsets.symmetric(horizontal: 20),
-    child: Text('Enter 4 digits verification code sent to your number', style: TextStyle(color: Colors.black, fontSize: 26, fontWeight: FontWeight.w500))
+    child: Text('Enter 4 digits verification code sent to your number', style: TextStyle(color: Colors.black, fontSize: 18.sp, fontWeight: FontWeight.w500))
     ),
     Container(
     constraints: const BoxConstraints(
@@ -118,7 +119,7 @@ class _OTPpagesState extends State<OTPpages> {
     child: Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: <Widget>[
-    Text('Confirm', style: TextStyle(color: Colors.white),),
+    Text('Confirm', style: TextStyle(color: Colors.white,fontSize: 16.sp,fontWeight: FontWeight.bold),),
     Container(
     padding: const EdgeInsets.all(8),
     decoration: BoxDecoration(
