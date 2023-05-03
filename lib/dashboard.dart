@@ -63,14 +63,14 @@ class _DashboardState extends State<Dashboard> {
                     
                     clipBehavior: Clip.antiAlias,
                     elevation: 3,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                     child: Container(
 
                       width: MediaQuery.of(context).size.width/2-20,
 
-                      color: Color(0xffddf5ff),
+                      color: const Color(0xffddf5ff),
                       height: Adaptive.h(25.5),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -104,7 +104,7 @@ class _DashboardState extends State<Dashboard> {
                     
                     clipBehavior: Clip.antiAlias,
                     elevation: 3,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                     child: Container(
@@ -112,7 +112,7 @@ class _DashboardState extends State<Dashboard> {
 
                       width: MediaQuery.of(context).size.width/2-20,
 
-                      color: Color(0xffffe7de),
+                      color: const Color(0xffffe7de),
                       height: Adaptive.h(25.5),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -140,7 +140,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ],
             ),
-              SizedBox(height: 4,),
+              const SizedBox(height: 4,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -151,14 +151,10 @@ class _DashboardState extends State<Dashboard> {
                   Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 5,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(7)),
-                    ),
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(7)),),
                     child: Container(
-
                       width: MediaQuery.of(context).size.width-20,
-
-                      color: Color(0xffdeffd3),
+                      color: const Color(0xffdeffd3),
                       height: 14.h,
                      child: Row(
                        children: [
@@ -176,7 +172,7 @@ class _DashboardState extends State<Dashboard> {
                              mainAxisAlignment: MainAxisAlignment.center,
                              children: [
                                Text("Apply for Loan",style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.bold,fontFamily: 'Scada'),),
-                               SizedBox(height: 5,),
+                               const SizedBox(height: 5),
                                Text("Click here to apply for Loan",style: TextStyle(fontSize: 14.sp,fontFamily: 'Scada'),),
                              ],
                            ),
@@ -187,35 +183,28 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
 
-
               ],
             ),
 
-
-
-            Row(
+           Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 8,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(7)),
                     ),
                     child: Container(
-
                       width: MediaQuery.of(context).size.width-20,
-
                       color: Color(0xFFFFF5DA),
                       height: 16.h,
                       child: Column(
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                             children: [
                             Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -233,10 +222,8 @@ class _DashboardState extends State<Dashboard> {
                               ),
                             )
                           ],),
-
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),

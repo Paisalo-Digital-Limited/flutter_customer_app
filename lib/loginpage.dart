@@ -8,6 +8,35 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+
+
+ /* Future<Null> getData() async {
+    EasyLoading.show(status: 'Loading');
+    final api = Provider.of<ApiService>(context, listen: false);
+    return await api
+        .hotelData(colors.hotelId)
+        .then((result) {
+      EasyLoading.dismiss();
+      setState(() {
+        if(result.data.isNotEmpty){
+          sfdata.saveHotelData(context,result.data[0].name,result.data[0].logo, result.data[0].address, result.data[0].phoneNumber, result.data[0].email, result.data[0].seatDiscountInPercent, result.data[0].itemDiscountInPercent, result.data[0].firstTimeDiscountInPercent, result.data[0].contactPerson,result.data[0].oneTimeBookingSeatNo,result.data[0].latitude,result.data[0].longitude);
+          membershipStatus=result.data[0].membershipStatus;
+        }else{
+
+        }
+
+      });
+    }).catchError((error) {
+
+      // EasyLoading.dismiss();
+      print(error);
+    });
+  }
+
+*/
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
