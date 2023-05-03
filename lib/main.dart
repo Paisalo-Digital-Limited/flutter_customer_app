@@ -30,6 +30,8 @@ class MyApp extends StatelessWidget {
       800:Color.fromRGBO(184, 4, 46, 0.9019607843137255),
       900:Color.fromRGBO(184, 4, 46, 1.0),
     };
+
+
     AppColors appColors=AppColors();
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
