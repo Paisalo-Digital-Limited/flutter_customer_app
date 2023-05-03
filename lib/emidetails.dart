@@ -9,6 +9,7 @@ class EMIDetails extends StatefulWidget {
 }
 
 class _EMIDetailsState extends State<EMIDetails> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,14 +18,17 @@ class _EMIDetailsState extends State<EMIDetails> {
       ),
         body:
         ListView.builder(
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
           itemCount: 6,
           itemBuilder: (context, position) {
+
             return Row(
               children: [
                 Expanded(
                   flex: 1,
                     child: SizedBox(
-                      height: 14.h,
+                      height: 16.h,
                       width: 1.w,
                       child: Image.asset("assests/images/listtrack.png"),
                     )),
