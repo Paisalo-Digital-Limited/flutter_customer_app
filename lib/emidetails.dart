@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class EMIDetails extends StatefulWidget {
@@ -9,6 +10,10 @@ class EMIDetails extends StatefulWidget {
 }
 
 class _EMIDetailsState extends State<EMIDetails> {
+
+  TextStyle defaultStyleLogin = GoogleFonts.rubik(
+    textStyle:TextStyle(color: Colors.black,fontSize: 16.sp,fontWeight: FontWeight.bold),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +51,7 @@ class _EMIDetailsState extends State<EMIDetails> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text("Loan EMI",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp,fontFamily: 'Scada'),),
+                                child: Text("Loan EMI",style: defaultStyleLogin,),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -70,16 +75,23 @@ class _EMIDetailsState extends State<EMIDetails> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("₹5456/-",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp,fontFamily: 'Scada'),),
-                                    SizedBox(height: 2,),
-                                    Text("05/23 -78547854",style: TextStyle(fontSize: 14.sp,fontFamily: 'Scada'),),
+                                    Text("₹5456/-",style: defaultStyleLogin,),
+                                    const SizedBox(height: 2,),
+                                    Text("",style: TextStyle(fontSize: 14.sp,fontFamily: 'Scada'),),
                                   ],
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: MaterialButton(onPressed: (){},child: Text("Paid",style: TextStyle(color: Colors.black45,fontFamily: 'Scada',fontWeight: FontWeight.bold,fontSize: 14.sp),)),
-                              )
+                                padding: const EdgeInsets.all(10.0),
+                                child: position%2==0?Container(
+                                    height: 20,
+                                    width: 20,
+                                    child: Image.asset("assests/images/correct.png")
+                                ):Text("Pending",textAlign: TextAlign.end,style: TextStyle(color: Colors.black45,fontFamily: 'Scada',fontWeight: FontWeight.bold,fontSize: 14.sp),),
+
+                              ),
+                               // MaterialButton(onPressed: (){},child: Text("Paid",style: TextStyle(color: Colors.black45,fontFamily: 'Scada',fontWeight: FontWeight.bold,fontSize: 14.sp),)),
+
                             ],
                           )
                         ],

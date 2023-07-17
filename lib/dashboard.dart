@@ -22,13 +22,20 @@ class _DashboardState extends State<Dashboard> {
 
 
   TextStyle defaultStyleLogin = GoogleFonts.rubik(
-    textStyle:TextStyle(color: Colors.black,fontSize: 16.sp,fontWeight: FontWeight.bold),
+    textStyle:TextStyle(color: Colors.black,fontSize: 17.sp,fontWeight: FontWeight.bold),
   );
 
 
   TextStyle smallSize = GoogleFonts.rubik(
-    textStyle:TextStyle(color: Colors.black,fontSize: 12.sp),
+    textStyle:TextStyle(color: Colors.black,fontSize: 13.sp),
   );
+  TextStyle paynowButton = GoogleFonts.rubik(
+    textStyle:TextStyle(color: Colors.white,fontSize: 14.sp),
+  );
+  TextStyle paynow_title = GoogleFonts.rubik(
+    textStyle:TextStyle(color: Colors.black,fontSize: 14.sp,fontWeight: FontWeight.bold),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,14 +45,14 @@ class _DashboardState extends State<Dashboard> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 50,),
+            SizedBox(height: 30,),
             SizedBox(
             height: Adaptive.h(25.5),
             child: Container(
             //width: Adaptive.w(70.5),
             child: CarouselSlider(
               options: CarouselOptions(
-                height: Adaptive.h(30.5),
+                height: Adaptive.h(50),
                 enlargeCenterPage: true,
                 autoPlay: true,
                 aspectRatio: 16 / 9,
@@ -71,11 +78,11 @@ class _DashboardState extends State<Dashboard> {
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>LoanDetails()));
                   },
                   child: Card(
-                    margin: const EdgeInsets.all(15),
+                    margin: const EdgeInsets.all(10),
                     clipBehavior: Clip.antiAlias,
                     elevation: 3,
                     shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     child: Container(
                       // width: MediaQuery.of(context).size.width/2-20,
@@ -97,7 +104,7 @@ class _DashboardState extends State<Dashboard> {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Center(child: Text("Here you can find all the loans on you from paisalo digital limited",style:smallSize,)),
+                            child: Center(child: Text("Here you can find all the loans on you from paisalo digital limited",textAlign: TextAlign.center,style:smallSize,)),
                           )
                         ],
 
@@ -110,11 +117,11 @@ class _DashboardState extends State<Dashboard> {
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>EMIDetails()));
                   },
                   child: Card(
-                    margin: const EdgeInsets.all(15),
+                    margin: const EdgeInsets.all(10),
                     clipBehavior: Clip.antiAlias,
                     elevation: 3,
                     shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     child: Container(
                    //width: MediaQuery.of(context).size.width/2-20,
@@ -136,7 +143,7 @@ class _DashboardState extends State<Dashboard> {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Center(child: Text("Here you can find all the details about you loans EMIs",style: smallSize
+                            child: Center(child: Text("Here you can find all the details about you loans EMIs",textAlign: TextAlign.center,style: smallSize
                             )),
                           )
                         ],
@@ -150,7 +157,7 @@ class _DashboardState extends State<Dashboard> {
             ),
             const SizedBox(height: 4,),
             Card(
-              margin: const EdgeInsets.only(left: 20,right: 20),
+              margin: const EdgeInsets.only(left: 15,right: 15),
               clipBehavior: Clip.antiAlias,
               elevation: 5,
               shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(7)),),
@@ -190,13 +197,13 @@ class _DashboardState extends State<Dashboard> {
             ),
 
             Card(
-              margin: const EdgeInsets.only(left:20,right: 20,top: 20),
+              margin: const EdgeInsets.only(left:15,right: 15,top: 20),
               clipBehavior: Clip.antiAlias,
               elevation: 8,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(7)),
               ),
-              child:InkWell(
+              child: InkWell(
                        onTap: () {
                          Navigator.push(context, MaterialPageRoute(builder: (context)=>EMIDetails()));
                        },
@@ -219,7 +226,7 @@ class _DashboardState extends State<Dashboard> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text("Due Date",style: smallSize,),
+                              Text("Due Date",style: paynow_title,),
                               Text("12-08-2023",style: smallSize,),
                             ],
                           ),
@@ -234,15 +241,15 @@ class _DashboardState extends State<Dashboard> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("₹5456/-",style: smallSize,),
+                              Text("₹5456/-",style: defaultStyleLogin,),
                               SizedBox(height: 2,),
-                              Text("05/23 -78547854",style:smallSize,),
+                              Text("Upcoming EMI before due date",style:smallSize,),
                             ],
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: MaterialButton(onPressed: (){},child: Text("Pay Now",style: smallSize,),color: Colors.green,),
+                          child: MaterialButton(onPressed: (){},child: Text("Pay Now",style: paynowButton,),color: Colors.green,),
                         )
                       ],
                     )

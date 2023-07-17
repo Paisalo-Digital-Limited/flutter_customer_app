@@ -21,23 +21,23 @@ class _LoanDetailsState extends State<LoanDetails> {
   bool valueterm=false;
   AppColors colors=new AppColors();
   TextStyle defaultStyleLogin = GoogleFonts.rubik(
-    textStyle:TextStyle(color: Colors.black,fontSize: 14.sp),
+    textStyle:TextStyle(color: Colors.black,fontSize: 16.sp,fontWeight: FontWeight.bold),
   );
   TextStyle defaultStyleGreen = GoogleFonts.rubik(
-    textStyle:TextStyle(color: Colors.green,fontSize: 12.sp),
+    textStyle:TextStyle(color: Colors.green,fontSize: 14.sp),
   );
   TextStyle defaultStyleRed = GoogleFonts.rubik(
-    textStyle:TextStyle(color: Colors.redAccent,fontSize: 12.sp),
+    textStyle:TextStyle(color: Colors.redAccent,fontSize: 14.sp,fontWeight: FontWeight.bold),
   );
 
   TextStyle smallSize = GoogleFonts.rubik(
-    textStyle:TextStyle(color: Colors.black45,fontSize: 12.sp),
+    textStyle:TextStyle(color: Colors.black45,fontSize: 14.sp),
   );
   TextStyle mediumSize = GoogleFonts.rubik(
-    textStyle:TextStyle(color: Colors.black45,fontSize: 12.sp),
+    textStyle:TextStyle(color: Colors.black45,fontSize: 14.sp),
   );
   TextStyle mediumSizeblack = GoogleFonts.rubik(
-    textStyle:TextStyle(color: Colors.black,fontSize: 12.sp),
+    textStyle:TextStyle(color: Colors.black,fontSize: 14.sp),
   );
 
 
@@ -69,8 +69,8 @@ class _LoanDetailsState extends State<LoanDetails> {
                         Padding(
                           padding: const EdgeInsets.only(left: 20.0),
                           child: Container(
-                              height: 5.h,
-                              width: 5.w,
+                              height: 8.h,
+                              width: 8.w,
                               child: Image.asset("assests/images/basicdetails.png")),
                         ),
                         Padding(
@@ -121,8 +121,8 @@ class _LoanDetailsState extends State<LoanDetails> {
                         Padding(
                           padding: const EdgeInsets.only(left: 20.0),
                           child: Container(
-                              height: 5.h,
-                              width: 5.w,
+                              height: 8.h,
+                              width: 8.w,
                               child: Image.asset("assests/images/pay.png")),
                         ),
                         Padding(
@@ -192,8 +192,8 @@ class _LoanDetailsState extends State<LoanDetails> {
                         Padding(
                           padding: const EdgeInsets.only(left: 20.0),
                           child: Container(
-                              height: 5.h,
-                              width: 5.w,
+                              height: 8.h,
+                              width: 8.w,
                               child: Image.asset("assests/images/identity.png")),
                         ),
                         Padding(
@@ -225,9 +225,7 @@ class _LoanDetailsState extends State<LoanDetails> {
                       ],
                     ),
 
-                    SizedBox(
-                      height: 50.0,
-                    ),
+                    const SizedBox(height: 50.0),
                     Container(
                       width: 220.0,
                         height: 40.0,
@@ -249,15 +247,15 @@ class _LoanDetailsState extends State<LoanDetails> {
                                 Text("Download Loan Details",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.rubik(
-                                    textStyle:TextStyle(color: Colors.white,fontSize: 11.sp,fontWeight: FontWeight.bold),
+                                    textStyle:TextStyle(color: Colors.white,fontSize: 14.sp,fontWeight: FontWeight.bold),
                                   ),
                                 ),
 
                                 Padding(
                                   padding: const EdgeInsets.only(left: 10.0),
                                   child: Container(
-                                      height: 5.h,
-                                      width: 5.w,
+                                      height: 6.h,
+                                      width: 6.w,
                                       child: Image.asset("assests/images/whitedownload.png")),
                                 ),
 
