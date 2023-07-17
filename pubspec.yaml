@@ -47,7 +47,10 @@ dependencies:
   dio: ^4.0.0
   http: ^0.13.3
   flutter_easyloading: ^3.0.0
-
+  geolocator: ^8.2.0
+  geocoding: ^2.0.4
+  google_fonts: ^4.0.4
+  otp_text_field: ^1.1.3
 
 dev_dependencies:
   flutter_test:
@@ -92,8 +95,9 @@ flutter:
     - family: Scada
       fonts:
         - asset: assests/fonts/scada_regular.ttf
-
-
+    - family: Abel
+      fonts:
+        - asset: assests/fonts/Abel-Regular.ttf
 
 
 

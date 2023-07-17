@@ -22,20 +22,12 @@ class _EMIDetailsState extends State<EMIDetails> {
           padding: EdgeInsets.zero,
           itemCount: 6,
           itemBuilder: (context, position) {
-
             return Row(
               children: [
-                Expanded(
-                  flex: 1,
-                    child: SizedBox(
-                      height: 16.h,
-                      width: 1.w,
-                      child: Image.asset("assests/images/listtrack.png"),
-                    )),
-                Expanded(
-                    flex: 12,
+                  Expanded(
+                  flex: 12,
                   child: Padding(
-                  padding: const EdgeInsets.all(0.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Card(
                     clipBehavior: Clip.antiAlias,
                     elevation: 5,
@@ -43,16 +35,14 @@ class _EMIDetailsState extends State<EMIDetails> {
                       borderRadius: BorderRadius.all(Radius.circular(5)),
                     ),
                     child: Container(
-
-                     // width: MediaQuery.of(context).size.width-20,
-
-                      color: Color(0xFFFFF5DA),
+                    // width: MediaQuery.of(context).size.width-20,
+                      color: position%2==0?const Color(0xFFFFF5DA):const Color(
+                          0xFFC9FCEF),
                       //height: 15.h,
                       child: Column(
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -73,7 +63,6 @@ class _EMIDetailsState extends State<EMIDetails> {
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_customer_app/dashboard.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:numeric_keyboard/numeric_keyboard.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -12,7 +13,9 @@ class OTPpages extends StatefulWidget {
 
 class _OTPpagesState extends State<OTPpages> {
 
-
+  TextStyle defaultStyleLogin = GoogleFonts.rubik(
+    textStyle:TextStyle(color: Colors.black,fontSize: 18.sp),
+  );
   String text = '';
 
   void _onKeyboardTap(String value) {
@@ -30,10 +33,11 @@ class _OTPpagesState extends State<OTPpages> {
         height: Adaptive.h(6.5),
         width: 12.w,
         decoration: BoxDecoration(
+            color: Colors.black12,
             border: Border.all(color: Colors.black, width: 0),
             borderRadius: const BorderRadius.all(Radius.circular(8))
         ),
-        child: Center(child: Text(text[position], style: TextStyle(color: Colors.black),)),
+        child: Center(child: Text(text[position], style: const TextStyle(color: Colors.black),)),
       );
     } catch (e) {
       return Container(
@@ -54,11 +58,11 @@ class _OTPpagesState extends State<OTPpages> {
     leading: IconButton(
     icon: Container(
     padding: const EdgeInsets.all(10),
-    decoration: BoxDecoration(
-    borderRadius: const BorderRadius.all(Radius.circular(20)),
+    decoration: const BoxDecoration(
+    borderRadius: BorderRadius.all(Radius.circular(20)),
     color: Color(0xFFFF0741),
     ),
-    child: Icon(Icons.arrow_back_ios, size: 16,),
+    child: const Icon(Icons.arrow_back_ios, size: 16,),
     ),
     onPressed: () => Navigator.of(context).pop(),
     ),
@@ -81,7 +85,7 @@ class _OTPpagesState extends State<OTPpages> {
     children: <Widget>[
     Container(
     margin: const EdgeInsets.symmetric(horizontal: 20),
-    child: Text('Enter 4 digits verification code sent to your number', style: TextStyle(color: Colors.black, fontSize: 18.sp, fontWeight: FontWeight.w500))
+    child: Text('Enter 4 digits verification code sent to your number', style: defaultStyleLogin)
     ),
     Container(
     constraints: const BoxConstraints(

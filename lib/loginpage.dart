@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 13, fontWeight: FontWeight.bold),
                           )),
                       Container(
-                        padding: const EdgeInsets.only(left: 6,right: 6),
+                        padding: const EdgeInsets. only(left: 6,right: 6),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(4),
@@ -79,13 +79,14 @@ class _LoginPageState extends State<LoginPage> {
                                   offset: Offset(1, 2),
                                   spreadRadius: 2.0)
                             ]),
+
                         child: Column(
                           children: <Widget>[
                             Container(
                               padding: EdgeInsets.all(2.0),
                               decoration: BoxDecoration(),
                               child: TextField(
-                                style: TextStyle(fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: "User ID",
@@ -98,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                       ),
-                      Padding(
+                      const Padding(
                           padding: EdgeInsets.all(6),
                           child: Text(
                             "User Name must be atleast 10 character",
@@ -113,10 +114,10 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text(
                             "Enter Password",
                             style: TextStyle(
-                                fontSize: 13, fontWeight: FontWeight.bold),
+                                fontSize: 13,fontWeight: FontWeight.bold),
                           )),
                       Container(
-                        padding: EdgeInsets.only(left: 6,right: 6),
+                        padding: const EdgeInsets.only(left: 6,right: 6),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(4),
@@ -130,16 +131,16 @@ class _LoginPageState extends State<LoginPage> {
                         child: Column(
                           children: <Widget>[
                             Container(
-                              padding: EdgeInsets.all(4.0),
+                              padding: const EdgeInsets.all(4.0),
                               child: TextField(
-                                style: TextStyle(fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                                 obscureText: true,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Password",
                                   hintStyle: TextStyle(
                                       color: Colors.grey[400], fontSize: 16),
-                                  icon: Icon(Icons.lock_open_sharp),
+                                  icon: const Icon(Icons.lock_open_sharp),
                                   iconColor: Colors.red.shade100,
                                 ),
                               ),

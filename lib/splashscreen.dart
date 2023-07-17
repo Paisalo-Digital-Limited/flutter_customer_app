@@ -5,6 +5,8 @@ import 'package:flutter_customer_app/loginbymobile.dart';
 import 'package:flutter_customer_app/loginpage.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'loginbyloan.dart';
+
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -22,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
           () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => LoginByMobile(),
+          builder: (context) => LoginByLoan(),
         ),
       ),
     );
@@ -34,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assests/images/loginscreen.png"),
+              image: AssetImage("assests/images/cust_splashback.png"),
               fit: BoxFit.cover,
             ),
           ),
@@ -81,12 +83,33 @@ class _SplashScreenState extends State<SplashScreen> {
                         )),
                   ],
                 ),
-              )
+              ),
+              Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 9,vertical: 10),
+                  child: Material(
+                    elevation: 5.0,
+                    borderRadius: BorderRadius.circular(25.0),
+                    color: Colors.white,
+                    child: MaterialButton(
+                      minWidth: MediaQuery.of(context).size.width,
+                      height: 50.0,
+                      padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      onPressed: () async {
 
-,
-              Padding(
+                      },
+                      child: Text("Get Started",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.red,fontSize: 18.sp,fontWeight: FontWeight.bold)),
+                    ),
+                  )
+              ),
+
+              /*Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
                   elevation: 6,
                   child: Container(height: Adaptive.h(6.5),
                   alignment: Alignment.center,
@@ -94,7 +117,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: Text("Get Started",style: TextStyle(color: Colors.red,fontSize: 18.sp,fontWeight: FontWeight.bold),),
                   color: Colors.white),
                 ),
-              )
+              )*/
             ],
           )),
     );

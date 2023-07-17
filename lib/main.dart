@@ -38,9 +38,11 @@ class MyApp extends StatelessWidget {
         return Provider<ApiService>(
           create: (context) => ApiService.create(),
           child:MaterialApp(
+            debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
-            theme: Theme.of(context).copyWith(
-              colorScheme: Theme.of(context).colorScheme.copyWith(
+           // theme: ThemeData(fontFamily: 'Scada'),
+             theme: Theme.of(context).copyWith(
+                colorScheme: Theme.of(context).colorScheme.copyWith(
                 primary: const Color(0xFFFF0749),
               ),
             ),

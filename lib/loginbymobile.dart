@@ -109,8 +109,7 @@ void initState() {
                                     maxWidth: 500
                                 ),
                                 margin: const EdgeInsets.only(top: 150),
-                                decoration: const BoxDecoration(color: Color(
-                                    0xFFF98A1), borderRadius: BorderRadius.all(Radius.circular(30))),
+                                decoration: const BoxDecoration(color: Color(0xFFF98A1), borderRadius: BorderRadius.all(Radius.circular(30))),
                               ),
                             ),
                             Center(
@@ -146,20 +145,17 @@ void initState() {
                               flex: 1,
                               child: Column(
                                 children: <Widget>[
-
-                                  Text( 'Please Enter Mobile Number', style: TextStyle(color: Color(0xFFFF0741), fontWeight: FontWeight.bold, fontSize: 15.sp)),
-
+                                  Text('Please Enter Mobile Number', style: TextStyle(color: const Color(0xFFFF0741), fontWeight: FontWeight.bold, fontSize: 15.sp)),
                                   Container(
                                     height: 6.h,
                                     constraints: const BoxConstraints( maxWidth: 500),
                                     margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                     child: CupertinoTextField(
                                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color: Colors.black12,
-                                          borderRadius: const BorderRadius.all(Radius.circular(15))
+                                          borderRadius: BorderRadius.all(Radius.circular(15))
                                       ),
-
                                       clearButtonMode: OverlayVisibilityMode.editing,
                                       keyboardType: TextInputType.phone,
                                       maxLines: 1,
@@ -197,17 +193,16 @@ void initState() {
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: <Widget>[
-                                            Text(
-                                              'Next',
+                                            Text('Next',
                                               style: TextStyle(color: Colors.white,fontSize: 16.sp,fontWeight: FontWeight.bold),
                                             ),
                                             Container(
                                               padding: const EdgeInsets.all(8),
-                                              decoration: BoxDecoration(
-                                                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                              decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.all(Radius.circular(20)),
                                                 color: Color(0xFFFF0741),
                                               ),
-                                              child: Icon(
+                                              child: const Icon(
                                                 Icons.arrow_forward_ios,
                                                 color: Colors.white,
                                                 size: 16,
@@ -220,7 +215,7 @@ void initState() {
                                     ),
 
                                   ),
-                                  SizedBox(height: 10,),
+                                  const SizedBox(height: 10,),
                                   InkWell(child: Text("Login via Loan account number",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15.sp,color: Colors.blue,decoration: TextDecoration.underline),),onTap: (){
                                     setState(() {
                                       _MobileNumberBlock=false;
@@ -238,8 +233,7 @@ void initState() {
                               flex: 1,
                               child: Column(
                                 children: <Widget>[
-                                  Text( 'Please Enter Loan Amount Number', style: TextStyle(fontSize: 15.sp,color: Color(0xFFFF0741), fontWeight: FontWeight.bold)),
-
+                                  Text('Please Enter Loan Amount Number', style: TextStyle(fontSize: 15.sp,color: const Color(0xFFFF0741), fontWeight: FontWeight.bold)),
                                   Container(
                                     height: 6.h,
                                     constraints: const BoxConstraints(
@@ -248,9 +242,9 @@ void initState() {
                                     margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                     child: CupertinoTextField(
                                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color: Colors.black12,
-                                          borderRadius: const BorderRadius.all(Radius.circular(15))
+                                          borderRadius: BorderRadius.all(Radius.circular(15))
                                       ),
 
                                       clearButtonMode: OverlayVisibilityMode.editing,
@@ -267,25 +261,12 @@ void initState() {
                                     ),
                                     child: MaterialButton(
                                       onPressed: () {
-                                        // if (phoneController.text.isNotEmpty) {
-                                        //   loginStore.getCodeWithPhoneNumber(context, phoneController.text.toString());
-                                        // } else {
-                                        //   loginStore.loginScaffoldKey.currentState.showSnackBar(SnackBar(
-                                        //     behavior: SnackBarBehavior.floating,
-                                        //     backgroundColor: Colors.red,
-                                        //     content: Text(
-                                        //       'Please enter a phone number',
-                                        //       style: TextStyle(color: Colors.white),
-                                        //     ),
-                                        //   ));
-                                        // }
-
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) => OTPpages(),));
                                       },
-                                      color:Color(0xFFFF0741),
+                                      color:const Color(0xFFFF0741),
                                       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(14))),
                                       child: Container(
                                         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
@@ -298,11 +279,11 @@ void initState() {
                                             ),
                                             Container(
                                               padding: const EdgeInsets.all(8),
-                                              decoration: BoxDecoration(
-                                                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                              decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.all(Radius.circular(20)),
                                                 color: Color(0xFFFF0741),
                                               ),
-                                              child: Icon(
+                                              child: const Icon(
                                                 Icons.arrow_forward_ios,
                                                 color: Colors.white,
                                                 size: 16,
@@ -316,7 +297,6 @@ void initState() {
 
                                   ),
                                   SizedBox(height: 10,),
-
                                   InkWell(child: Text("Login via Mobile number",style: TextStyle(fontSize: 15.sp,color: Colors.blue,decoration: TextDecoration.underline,fontWeight: FontWeight.bold),),onTap: (){
                                     setState(() {
                                       _MobileNumberBlock=true;
