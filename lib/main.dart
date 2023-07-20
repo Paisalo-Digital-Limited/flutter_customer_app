@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_customer_app/splashscreen.dart';
 import 'package:flutter_customer_app/colors/AppColors.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             home:  SplashScreen(),
+            builder: EasyLoading.init(),
           ),
 
         );

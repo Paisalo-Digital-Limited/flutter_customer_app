@@ -1,19 +1,27 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_customer_app/otppages.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:numeric_keyboard/numeric_keyboard.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'const/common.dart';
 import 'dashboard.dart';
+import 'network/api_service.dart';
 
 class OtpVerify extends StatefulWidget {
-  const OtpVerify({Key? key}) : super(key: key);
+  //const OtpVerify({Key? key}) : super(key: key);
+  final int _Id;
+  const OtpVerify(this._Id);
 
   @override
   State<OtpVerify> createState() => _OtpVerifyState();
@@ -23,8 +31,9 @@ class _OtpVerifyState extends State<OtpVerify> {
   var  _MobileNumberBlock=false;
   var  _LoanNumberBlock=true;
   OtpFieldController otpController = OtpFieldController();
+  TextEditingController loanController = TextEditingController();
   String _Otp="";
-
+  CommonAction commonAlert= CommonAction();
   String? _currentAddress;
   Position? _currentPosition;
   bool _loanlayout=true;
@@ -81,7 +90,6 @@ class _OtpVerifyState extends State<OtpVerify> {
 
   Future<void> _getCurrentPosition() async {
     final hasPermission = await _handleLocationPermission();
-
     if (!hasPermission) return;
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
         .then((Position position) {
@@ -111,7 +119,7 @@ class _OtpVerifyState extends State<OtpVerify> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _getCurrentPosition();
+   // _getCurrentPosition();
   }
 
 
@@ -138,6 +146,34 @@ class _OtpVerifyState extends State<OtpVerify> {
       );
     }
   }
+
+  //////////////////  Match Loan  //////////////////////
+  Future<Null> matchLoan(String loanNo) async {
+    // print(mobileController.text.toString());
+    EasyLoading.show(status: 'Loading');
+    final api = Provider.of<ApiService>(context, listen: false);
+    return await api
+        .loanMapped("${widget._Id}",loanNo)
+        .then((result) {
+      setState(() {
+        EasyLoading.dismiss();
+        if(result.statusCode==200){
+          Navigator.pushReplacement(
+              context,MaterialPageRoute(
+            builder: (context) => Dashboard(widget._Id,loanNo),));
+        }else{
+          commonAlert.messageAlertError(context,"Loan number not exists. Please try again","Error");
+        }
+
+      });
+    }).catchError((error) {
+      EasyLoading.dismiss();
+      print(error);
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -203,16 +239,16 @@ class _OtpVerifyState extends State<OtpVerify> {
                                       margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
                                       height: 6.h,
                                       child:CupertinoTextField(
+                                        controller: loanController,
                                         padding: const EdgeInsets.symmetric(horizontal: 16),
                                         decoration: const BoxDecoration(
                                             color: Colors.black12,
                                             borderRadius: BorderRadius.all(Radius.circular(5))
                                         ),
-
                                         clearButtonMode: OverlayVisibilityMode.editing,
                                         // keyboardType: TextInputType.phone,
                                         maxLines: 1,
-                                        style: TextStyle(fontSize: 15.sp),
+                                        style: TextStyle(fontSize: 17.sp),
                                         placeholder: '',
                                       ),
                                     ),
@@ -228,7 +264,7 @@ class _OtpVerifyState extends State<OtpVerify> {
                                             height: 6.h,
                                             padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                                             onPressed: () async {
-                                              Navigator.push(context, MaterialPageRoute(builder:(context)=> Dashboard()));
+                                              matchLoan(loanController.text);
                                             },
                                             child: Text("SUBMIT",
                                               textAlign: TextAlign.center,

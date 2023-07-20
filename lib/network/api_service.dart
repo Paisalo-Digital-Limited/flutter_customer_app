@@ -1,10 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_customer_app/models/loandata.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../models/signupdata.dart';
+
 part 'api_service.g.dart';
 
-@RestApi(baseUrl:"http://api.club75.in/api/")
+@RestApi(baseUrl:"https://erpservice.paisalo.in:980/PDL.Mobile.Api/api/")
 
 
 abstract class ApiService {
@@ -38,4 +41,29 @@ abstract class ApiService {
       @Path("mobile") mobile,
       @Path("ClubId")hotelId,
       );*/
+
+  @POST("UserMobile/CreateCustomerRegistration")
+  Future<Signupdata> signUp(
+      @Field("name") name,
+      @Field("phoneNO") phoneNO,
+      @Field("password") password,
+      );
+
+  @GET("UserMobile/LoginCheck")
+  Future<Signupdata> login(
+      @Query("Phone") String  phoneNO,
+      @Query("Pass") String  password,
+      );
+
+  @POST("UserMobile/UpdateLoanNoInCustomerRegistration")
+  Future<Signupdata> loanMapped(
+      @Query("Id") String  id,
+      @Query("LoanNo") String  loanNo,
+      );
+
+
+  @GET("UserMobile/LoanUserDetails")
+  Future<Loandata> loandata(
+      @Query("LoanActNo") String  loanActNo,
+      );
 }

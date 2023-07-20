@@ -5,8 +5,13 @@ import 'package:flutter_customer_app/emidetails.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'models/loandata.dart';
+
 class LoanDetails extends StatefulWidget {
-  const LoanDetails({Key? key}) : super(key: key);
+  //const LoanDetails({Key? key}) : super(key: key);
+  final Data _data;
+  final String _loanNo;
+  const LoanDetails(this._data,this._loanNo);
 
   @override
   State<LoanDetails> createState() => _LoanDetailsState();
@@ -16,8 +21,9 @@ final List<String> imgList = [
   "assests/images/bannerback.png",
   "assests/images/bannerback.png"
 ];
-class _LoanDetailsState extends State<LoanDetails> {
 
+
+class _LoanDetailsState extends State<LoanDetails> {
   bool valueterm=false;
   AppColors colors=new AppColors();
   TextStyle defaultStyleLogin = GoogleFonts.rubik(
@@ -82,17 +88,17 @@ class _LoanDetailsState extends State<LoanDetails> {
                             children: [
                               Text("Personal Details",style: defaultStyleLogin),
                               const SizedBox(height: 10),
-                              Text("Ajay Singh",style: defaultStyleRed,),
+                              Text(widget._data!.name,style: defaultStyleRed,),
                               SizedBox(
                                 height: 5.0,
                               ),
-                              Text("S/O- "+"Prem Singh",style: mediumSizeblack,),
+                              Text("${widget._data!.phoneNo}",style: mediumSizeblack,),
                               SizedBox(
                                 height: 5.0,
                               ),
                               SizedBox(
                                 width:  MediaQuery.of(context).size.width*.6,
-                                child:   Text("414, New Barakhamba Rd, Connaught Lane, Barakhamba, New Delhi, Delhi 110001",style: smallSize,),
+                                child:   Text(widget._data!.address,style: smallSize,),
                               )
 
                             ],
@@ -140,27 +146,27 @@ class _LoanDetailsState extends State<LoanDetails> {
                                   SizedBox(
                                     height: 5.0,
                                   ),
-                                  Text("Loan No. :- 3434543423423",style: defaultStyleRed,),
+                                  Text("Loan No. :- ${widget._loanNo}",style: defaultStyleRed,),
                                   SizedBox(
                                     height: 5.0,
                                   ),
-                                  Text("Loan Amount :- "+"120000 -/-",style: mediumSizeblack,),
+                                  Text("Loan Amount :- ₹ ${widget._data!.pdlSanctionedAmt} -/-",style: mediumSizeblack,),
                                   SizedBox(
                                     height: 5.0,
                                   ),
-                                  Text("EMI Amount :- "+"5000 -/-",style: mediumSizeblack,),
+                                  Text("EMI Amount :- ₹ ${widget._data!.loanEmi[0].amount} -/-",style: mediumSizeblack,),
+                                  // SizedBox(
+                                  //   height: 5.0,
+                                  // ),
+                                  // Text("No. of EMIs :- "+"24",style: mediumSizeblack,),
                                   SizedBox(
                                     height: 5.0,
                                   ),
-                                  Text("No. of EMIs :- "+"24",style: mediumSizeblack,),
+                                  Text("Start Year :- "+"${widget._data!.emiStartingYear}",style: mediumSizeblack,),
                                   SizedBox(
                                     height: 5.0,
                                   ),
-                                  Text("Start Year :- "+"May 2021",style: mediumSizeblack,),
-                                  SizedBox(
-                                    height: 5.0,
-                                  ),
-                                  Text("End Year :- "+"June 2023",style: mediumSizeblack,),
+                                  //Text("End Year :- "+"June 2023",style: mediumSizeblack,),
 
 
                                 ],
@@ -211,11 +217,11 @@ class _LoanDetailsState extends State<LoanDetails> {
                                   SizedBox(
                                     height: 5.0,
                                   ),
-                                  Text("Aadhaar No. :- 3434543423423",style: mediumSizeblack,),
+                                  Text("Aadhaar No. :- ${(widget._data!.aadharId).substring(0,8)}****",style: mediumSizeblack,),
                                   SizedBox(
                                     height: 5.0,
                                   ),
-                                  Text("PAN :- "+"KLJ098KL",style: mediumSizeblack,),
+                                  Text("PAN :- ${widget._data!.panNo !="" ?(widget._data!.panNo).substring(0,6) : "" }****",style: mediumSizeblack,),
 
                                 ],
                               ),

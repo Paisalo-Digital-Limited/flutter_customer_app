@@ -1,12 +1,20 @@
+import 'dart:collection';
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_customer_app/dashboard.dart';
 import 'package:flutter_customer_app/otppages.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'const/common.dart';
+import 'network/api_service.dart';
 import 'otp.dart';
 
 class LoginByLoan extends StatefulWidget {
@@ -25,7 +33,13 @@ class _LoginByLoanState extends State<LoginByLoan> {
   Position? _currentPosition;
   bool _loanlayout=true;
   bool _mobilelayout=false;
-
+  CommonAction commonAlert= CommonAction();
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController mobileController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+  TextEditingController mobileControllerlogin = new TextEditingController();
+  TextEditingController passwordControllerlogin = new TextEditingController();
+  var _userID;
 
   TextStyle defaultStyle = GoogleFonts.rubik(
     textStyle:TextStyle(color: Colors.grey,fontSize: 16.sp),
@@ -92,6 +106,80 @@ class _LoginByLoanState extends State<LoginByLoan> {
       debugPrint(e);
     });
   }
+
+
+  //////////////////  SignUp  //////////////////////
+  Future<Null> signUp() async {
+     //print(mobileController.text.toString());
+       EasyLoading.show(status: 'Loading');
+    // SharedPreferences preferences = await SharedPreferences.getInstance();
+    final api = Provider.of<ApiService>(context, listen: false);
+    return await api
+        .signUp(nameController.text.toString(),mobileController.text.toString().trim(),passwordController.text.toString().trim())
+        .then((result) {
+         setState(() {
+         EasyLoading.dismiss();
+        if(result.data.isNotEmpty){
+          _userID=result.data;
+          _mobilelayout=false; 
+          _loanlayout=true;
+          commonAlert.messageAlertError(context,"Please Login","Success");
+          nameController.text="";
+          mobileController.text="";
+          passwordController.text="";
+        }else{
+          commonAlert.messageAlertError(context,"Account ${result.message}. Please Login","Error");
+        }
+      });
+    }).catchError((error) {
+       EasyLoading.dismiss();
+      print(error);
+    });
+  }
+
+  //////////////////  Login  //////////////////////
+  Future<Null> login() async {
+    EasyLoading.show(status: 'Loading');
+    final api = Provider.of<ApiService>(context, listen: false);
+    return await api
+        .login(mobileControllerlogin.text.toString().trim(),passwordControllerlogin.text.toString().trim())
+        .then((result) {
+      setState(() {
+        EasyLoading.dismiss();
+        if(result.data.isNotEmpty){
+          List<dynamic> list=jsonDecode(result.data);
+          var _data=list[0]['Status'];
+          var _ID=list[0]['Id'];
+          var _LoanNo=list[0]['LoanNo'];
+          if(_data=='Loan Number Not Mapped.'){
+            Navigator.pushReplacement(
+                context,MaterialPageRoute(
+                  builder: (context) => OtpVerify(_ID),));
+          }else if(_data=='You are not Register.'){
+            commonAlert.messageAlertError(context,"You are not Register.","Error");
+          }else if(_data=="Sucessfully Get."){
+            Navigator.pushReplacement(
+                context,MaterialPageRoute(
+              builder: (context) => Dashboard(_ID,_LoanNo),));
+          }else if(_data=="Wrong Credentials."){
+            commonAlert.messageAlertError(context,_data,"Error");
+          }
+         print("DATA-- "+_data);
+
+        }else{
+          commonAlert.messageAlertError(context,"Account ${result.message}. Please Login","Error");
+        }
+
+      });
+    }).catchError((error) {
+
+      EasyLoading.dismiss();
+      print(error);
+    });
+  }
+
+
+
 
   @override
   void initState() {
@@ -177,6 +265,7 @@ class _LoginByLoanState extends State<LoginByLoan> {
                                         margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
                                         height: 6.h,
                                         child:CupertinoTextField(
+                                          controller: mobileControllerlogin,
                                           padding: const EdgeInsets.symmetric(horizontal: 16),
                                           decoration: const BoxDecoration(
                                               color: Colors.black12,
@@ -186,7 +275,8 @@ class _LoginByLoanState extends State<LoginByLoan> {
                                           clearButtonMode: OverlayVisibilityMode.editing,
                                           keyboardType: TextInputType.phone,
                                           maxLines: 1,
-                                          style: TextStyle(fontSize: 15.sp),
+                                          maxLength: 10,
+                                          style: TextStyle(fontSize: 17.sp),
                                           placeholder: '',
                                         ),
                                       ),
@@ -208,15 +298,17 @@ class _LoginByLoanState extends State<LoginByLoan> {
                                         margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
                                         height: 6.h,
                                         child:CupertinoTextField(
+                                          controller: passwordControllerlogin,
                                           padding: const EdgeInsets.symmetric(horizontal: 16),
                                           decoration: const BoxDecoration(
                                               color: Colors.black12,
                                               borderRadius: BorderRadius.all(Radius.circular(5))
                                           ),
                                           clearButtonMode: OverlayVisibilityMode.editing,
-                                          // keyboardType: TextInputType.phone,
+                                           keyboardType: TextInputType.visiblePassword,
+                                          obscureText: true,
                                           maxLines: 1,
-                                          style: TextStyle(fontSize: 15.sp),
+                                          style: TextStyle(fontSize: 17.sp),
                                           placeholder: '',
                                         ),
                                       ),
@@ -232,10 +324,14 @@ class _LoginByLoanState extends State<LoginByLoan> {
                                               height: 1.h,
                                               padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                                               onPressed: () async {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) => OtpVerify(),));
+                                                if(mobileControllerlogin.text.length<10){
+                                                  commonAlert.showToast(context,"Enter Mobile");
+                                                }else if(passwordControllerlogin.text.length<3){
+                                                  commonAlert.showToast(context,"Enter Password");
+                                                }else{
+                                                  login();
+                                                }
+
                                               },
                                               child: Text("SUBMIT",
                                                 textAlign: TextAlign.center,
@@ -358,6 +454,7 @@ class _LoginByLoanState extends State<LoginByLoan> {
                                         margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
                                         height: 6.h,
                                         child:CupertinoTextField(
+                                          controller: nameController,
                                           padding: const EdgeInsets.symmetric(horizontal: 16),
                                           decoration: BoxDecoration(
                                               color: Colors.black12,
@@ -367,7 +464,7 @@ class _LoginByLoanState extends State<LoginByLoan> {
                                           clearButtonMode: OverlayVisibilityMode.editing,
                                           //keyboardType: TextInputType.phone,
                                           maxLines: 1,
-                                          style: TextStyle(fontSize: 15.sp),
+                                          style: TextStyle(fontSize: 17.sp),
                                           placeholder: '',
                                         ),
                                       ),
@@ -387,6 +484,7 @@ class _LoginByLoanState extends State<LoginByLoan> {
                                         margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
                                         height: 6.h,
                                         child:CupertinoTextField(
+                                          controller: mobileController,
                                           padding: const EdgeInsets.symmetric(horizontal: 16),
                                           decoration: BoxDecoration(
                                               color: Colors.black12,
@@ -395,8 +493,9 @@ class _LoginByLoanState extends State<LoginByLoan> {
 
                                           clearButtonMode: OverlayVisibilityMode.editing,
                                           keyboardType: TextInputType.phone,
+                                          maxLength: 10,
                                           maxLines: 1,
-                                          style: TextStyle(fontSize: 15.sp),
+                                          style: TextStyle(fontSize: 17.sp),
                                           placeholder: '',
                                         ),
                                       ),
@@ -418,6 +517,7 @@ class _LoginByLoanState extends State<LoginByLoan> {
                                         margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
                                         height: 6.h,
                                         child:CupertinoTextField(
+                                          controller: passwordController,
                                           padding: const EdgeInsets.symmetric(horizontal: 16),
                                           decoration: BoxDecoration(
                                               color: Colors.black12,
@@ -425,9 +525,10 @@ class _LoginByLoanState extends State<LoginByLoan> {
                                           ),
 
                                           clearButtonMode: OverlayVisibilityMode.editing,
-                                          // keyboardType: TextInputType.phone,
+                                          keyboardType: TextInputType.visiblePassword,
+                                          obscureText: true,
                                           maxLines: 1,
-                                          style: TextStyle(fontSize: 15.sp),
+                                          style: TextStyle(fontSize: 17.sp),
                                           placeholder: '',
                                         ),
                                       ),
@@ -443,7 +544,15 @@ class _LoginByLoanState extends State<LoginByLoan> {
                                               height: 6.h,
                                               padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                                               onPressed: () async {
-
+                                                if(nameController.text.length<3){
+                                                  commonAlert.showToast(context,"Enter Name");
+                                                }else if(mobileController.text.length<10){
+                                                  commonAlert.showToast(context,"Enter Mobile");
+                                                }else if(passwordController.text.length<3){
+                                                  commonAlert.showToast(context,"Enter Password");
+                                                }else{
+                                                     signUp();
+                                                }
                                               },
                                               child: Text("SUBMIT",
                                                 textAlign: TextAlign.center,

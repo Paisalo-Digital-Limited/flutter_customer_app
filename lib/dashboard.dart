@@ -1,14 +1,23 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_customer_app/emidetails.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'applyloan/dataforapplyloan.dart';
+import 'const/common.dart';
 import 'loandetails.dart';
+import 'models/loandata.dart';
+import 'network/api_service.dart';
+import 'paynowweb.dart';
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  //const Dashboard({Key? key}) : super(key: key);
+  final int _Id;
+  final String _loanNo;
+  const Dashboard(this._Id,this._loanNo);
 
   @override
   State<Dashboard> createState() => _DashboardState();
@@ -20,6 +29,18 @@ final List<String> imgList = [
 ];
 class _DashboardState extends State<Dashboard> {
 
+  CommonAction commonAlert= CommonAction();
+  Data? data;
+  List<LoanEmi>? loanEmilist;
+  bool pendingEmi=false;
+  String loanAmount="";
+  String loanDueDate="";
+
+
+  /////////////////payment///////////////
+  String _platformVersion = 'Unknown';
+  String responseData = "Nothing";
+ // final _isgpayuiPlugin = IsgpayuiPlugin();
 
   TextStyle defaultStyleLogin = GoogleFonts.rubik(
     textStyle:TextStyle(color: Colors.black,fontSize: 17.sp,fontWeight: FontWeight.bold),
@@ -30,22 +51,82 @@ class _DashboardState extends State<Dashboard> {
     textStyle:TextStyle(color: Colors.black,fontSize: 13.sp),
   );
   TextStyle paynowButton = GoogleFonts.rubik(
-    textStyle:TextStyle(color: Colors.white,fontSize: 14.sp),
+    textStyle:TextStyle(color: Colors.white,fontSize: 15.sp,fontWeight: FontWeight.bold),
   );
   TextStyle paynow_title = GoogleFonts.rubik(
     textStyle:TextStyle(color: Colors.black,fontSize: 14.sp,fontWeight: FontWeight.bold),
   );
 
+  //////////////////  LoanData  //////////////////////
+  Future<Null> LoanDataDetails() async {
+    EasyLoading.show(status: 'Loading');
+    final api = Provider.of<ApiService>(context, listen: false);
+    return await api
+        .loandata(widget._loanNo)
+        .then((result) {
+      setState(() {
+        EasyLoading.dismiss();
+        if(result.statusCode==200){
+          if(result.data != null){
+            data=result.data;
+            loanEmilist=result.data?.loanEmi;
+            for (int i = 0; i <loanEmilist!.length; i++) {
+              if(pendingEmi==false){
+                if(loanEmilist![i].paid=="null"){
+                  pendingEmi=true;
+                  loanAmount=loanEmilist![i].amount;
+                  loanDueDate=commonAlert.dateFormateSQLServer(context,loanEmilist![i].emiDueDate);
+                }
+              }
+            }
+          }else{
+            commonAlert.messageAlertError(context,"Account ${result.message}. Please Login","Error");
+          }
+        }else{
+          commonAlert.messageAlertError(context,"Account details not found","Error");
+        }
+
+
+      });
+    }).catchError((error) {
+
+      EasyLoading.dismiss();
+      print(error);
+    });
+  }
+
+
+  @override
+  void initState() {
+    LoanDataDetails();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("Dashboard",style: TextStyle(fontFamily: 'Scada'),),
+      appBar: AppBar(
+        title: const Text("Paisalo Application",style: TextStyle(fontFamily: 'Scada'),),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              // do something
+            },
+          )
+        ],
+      ),
+      // drawer: Drawer(
+      //     //child: // Populate the Drawer in the next step.
       // ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 30,),
+           // SizedBox(height: 10,),
             SizedBox(
             height: Adaptive.h(25.5),
             child: Container(
@@ -75,7 +156,7 @@ class _DashboardState extends State<Dashboard> {
               children: [
                 Expanded(child:  GestureDetector(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>LoanDetails()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>LoanDetails(data!,widget._loanNo)));
                   },
                   child: Card(
                     margin: const EdgeInsets.all(10),
@@ -114,7 +195,7 @@ class _DashboardState extends State<Dashboard> {
                 ),),
                 Expanded(child: GestureDetector(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>EMIDetails()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>EMIDetails(loanEmilist)));
                   },
                   child: Card(
                     margin: const EdgeInsets.all(10),
@@ -155,57 +236,17 @@ class _DashboardState extends State<Dashboard> {
 
               ],
             ),
-            const SizedBox(height: 4,),
-            Card(
-              margin: const EdgeInsets.only(left: 15,right: 15),
-              clipBehavior: Clip.antiAlias,
-              elevation: 5,
-              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(7)),),
-              child:InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>DataforLoan()));
-                  },
-                child: Container(
-                width: MediaQuery.of(context).size.width-20,
-                color: const Color(0xffdeffd3),
-                height: 14.h,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: Container(
-                          height: 8.h,
-                          width: 8.w,
-                          child: Image.asset("assests/images/applyloan.png")),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Apply for Loan",style: defaultStyleLogin),
-                          const SizedBox(height: 5),
-                          Text("Click here to apply for Loan",style: smallSize,),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              )
-              )
-            ),
 
             Card(
               margin: const EdgeInsets.only(left:15,right: 15,top: 20),
               clipBehavior: Clip.antiAlias,
-              elevation: 8,
+              elevation: 5,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(7)),
               ),
               child: InkWell(
                        onTap: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (context)=>EMIDetails()));
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>EMIDetails(loanEmilist)));
                        },
                 child: Container(
                 width: MediaQuery.of(context).size.width-20,
@@ -227,7 +268,7 @@ class _DashboardState extends State<Dashboard> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text("Due Date",style: paynow_title,),
-                              Text("12-08-2023",style: smallSize,),
+                              Text(loanDueDate,style: smallSize,),
                             ],
                           ),
                         )
@@ -241,21 +282,64 @@ class _DashboardState extends State<Dashboard> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("₹5456/-",style: defaultStyleLogin,),
+                              Text("₹ ${loanAmount}/-",style: defaultStyleLogin,),
                               SizedBox(height: 2,),
-                              Text("Upcoming EMI before due date",style:smallSize,),
+                              Text("Pay EMI before due date",style:smallSize,),
                             ],
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: MaterialButton(onPressed: (){},child: Text("Pay Now",style: paynowButton,),color: Colors.green,),
+                          child: MaterialButton(onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>PayNowWeb("https://pdlpay.paisalo.in:946/start.html",loanAmount,widget._loanNo)));
+                          },child: Text("Pay Now",style: paynowButton,),color: Colors.green,),
                         )
                       ],
                     )
                   ],
                 ),
               ),),
+            ),
+            const SizedBox(height: 15,),
+            Card(
+                margin: const EdgeInsets.only(left: 15,right: 15),
+                clipBehavior: Clip.antiAlias,
+                elevation: 5,
+                shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(7)),),
+                child:InkWell(
+                    onTap: () {
+                      commonAlert.showToast(context,"Coming soon");
+                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>DataforLoan()));
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width-20,
+                      color: const Color(0xffdeffd3),
+                      height: 10.h,
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20.0),
+                            child: Container(
+                                height: 8.h,
+                                width: 8.w,
+                                child: Image.asset("assests/images/applyloan.png")),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Apply for Loan",style: defaultStyleLogin),
+                                const SizedBox(height: 5),
+                                Text("Click here to apply for Loan",style: smallSize,),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                )
             ),
           ],
         ),
