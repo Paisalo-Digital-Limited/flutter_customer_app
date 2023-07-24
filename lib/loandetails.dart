@@ -100,7 +100,6 @@ class _LoanDetailsState extends State<LoanDetails> {
                                 width:  MediaQuery.of(context).size.width*.6,
                                 child:   Text(widget._data!.address,style: smallSize,),
                               )
-
                             ],
                           ),
                         )

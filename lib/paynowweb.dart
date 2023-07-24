@@ -60,8 +60,7 @@ class _PayNowWebState extends State<PayNowWeb> {
             code: ${error.errorCode}
             description: ${error.description}
             errorType: ${error.errorType}
-            isForMainFrame: ${error.isForMainFrame}
-            ''');
+            isForMainFrame: ${error.isForMainFrame}''');
           },
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith(widget._url)) {
@@ -101,7 +100,6 @@ class _PayNowWebState extends State<PayNowWeb> {
 
   @override
   Widget build(BuildContext context) {
-
 
     return Scaffold(
       appBar: AppBar(
