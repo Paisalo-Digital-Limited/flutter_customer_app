@@ -100,7 +100,6 @@ class _PayNowWebState extends State<PayNowWeb> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Payment Gateway",style: TextStyle(fontFamily: 'Scada'),),

@@ -79,6 +79,7 @@ class _LoanDetailsState extends State<LoanDetails> {
                               width: 8.w,
                               child: Image.asset("assests/images/basicdetails.png")),
                         ),
+
                         Padding(
                           padding: const EdgeInsets.only(left: 20.0),
                           child: Column(

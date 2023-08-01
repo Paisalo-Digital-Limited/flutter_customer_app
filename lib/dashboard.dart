@@ -107,7 +107,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Paisalo Application",style: TextStyle(fontFamily: 'Scada'),),
+        title: const Text("Paisalo",style: TextStyle(fontFamily: 'Scada'),),
         actions: <Widget>[
           IconButton(
             icon: Icon(
@@ -259,7 +259,7 @@ class _DashboardState extends State<Dashboard> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Text("Your Upcoming EMI",style: defaultStyleLogin,),
+                          child: Text("Upcoming EMI",style: defaultStyleLogin,),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),

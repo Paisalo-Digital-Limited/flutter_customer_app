@@ -157,7 +157,7 @@ class _LoginByLoanState extends State<LoginByLoan> {
                   builder: (context) => OtpVerify(_ID),));
           }else if(_data=='You are not Register.'){
             commonAlert.messageAlertError(context,"You are not Register.","Error");
-          }else if(_data=="Sucessfully Get."){
+          }else if(_data=="Successfully Get."){
             Navigator.pushReplacement(
                 context,MaterialPageRoute(
               builder: (context) => Dashboard(_ID,_LoanNo),));

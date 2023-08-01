@@ -177,7 +177,6 @@ class _OtpVerifyState extends State<OtpVerify> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
